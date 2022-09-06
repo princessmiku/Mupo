@@ -61,8 +61,8 @@ def displayTables():
     if user.last_song_cache:
         songList.add_row("---", "Song suggestions\nbased on the last song", " ", "----")
         last_song: Song = user.last_song_cache
-        sorted_keys = sorted(last_song.after.keys(), reverse=True)
-        for key in sorted_keys[:5]:
+        sorted_dict = {k: v for k, v in sorted(last_song.after.items(), key=lambda item: item[1], reverse=True)}
+        for key in list(sorted_dict.keys())[:5]:
             sl_song = Song(int(key))
             songList.add_row(str(sl_song.id), sl_song.title, sl_song.artist, str(sl_song.year))
     console = Console()
